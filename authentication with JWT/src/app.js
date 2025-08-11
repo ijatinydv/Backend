@@ -1,10 +1,13 @@
 const express = require('express')
 const authRoutes = require('./routes/auth.routes')
+const cookieParser = require('cookie-parser')
 
 
 
 const app = express();
 app.use(express.json())   // middleware
+app.use(cookieParser())
+
 
 // on applying /auth here the api names modifies by /auth/register and /auth/login etc
 

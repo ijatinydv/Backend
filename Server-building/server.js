@@ -1,7 +1,6 @@
 const express = require('express')
 
 const app = express()
-// 7296819765 - rohit
 
 //  /home => Welcome to home page
 app.get('/home',(req,res)=>{

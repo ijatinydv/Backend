@@ -10,3 +10,5 @@ post /register --> user create/register krna
 POST /login --> check username & password then loggedin the user
 GET /user --> get user data [protected]
 GET /logout --> loggedout
+
+install a package cookie-parser for fix data in cookies and use it as a middleware
