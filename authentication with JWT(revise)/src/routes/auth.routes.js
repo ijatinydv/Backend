@@ -58,7 +58,7 @@ router.post('/login',async(req,res)=>{
     const {username,password} = req.body
 
     const user = await userModel.findOne({username})
-    if(!User){
+    if(!user){
         return res.status(404).json({
             message:"user account not found"
         })
@@ -85,5 +85,12 @@ router.post('/login',async(req,res)=>{
 
 })
 
+router.get('/logout',async(req,res)=>{
+    res.clearCookie("token")
+
+    res.status(200).json({
+        message:"user logged out successfully"
+    })
+})
 
 module.exports = router
