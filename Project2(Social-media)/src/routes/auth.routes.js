@@ -1,8 +1,6 @@
 // here we define only routes kaun kaunse hai
 
 const express = require('express');
-const userModel = require('../models/user.model')
-const jwt = require('jsonwebtoken')
 const {registerController, loginController} = require('../controllers/auth.controller')
 const router = express.Router()
 
