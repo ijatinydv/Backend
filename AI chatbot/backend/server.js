@@ -10,7 +10,11 @@ const { text } = require('stream/consumers');
 
 const httpServer = createServer(app);
 
-const io = new Server(httpServer, { /* options */ });
+const io = new Server(httpServer, { 
+    cors:{
+        origin:"http://localhost:5173",  // frontend url
+    }
+});
 
 const chatHistory = []
 
@@ -28,11 +32,11 @@ io.on("connection", (socket) => {    // first builtin event
    // emit = event fire krna
 
    socket.on("ai-message",async (data)=>{
-    console.log(data.prompt)
+    // console.log(data)
 
     chatHistory.push({
         role:"user",
-        parts: [{text:data.prompt}]
+        parts: [{text:data}]
     })
 
     const response = await generateResponse(chatHistory)
