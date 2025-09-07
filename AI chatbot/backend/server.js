@@ -6,10 +6,13 @@ const { Server } = require("socket.io");
 
 const generateResponse = require('./src/services/ai.service');
 const { Console } = require('console');
+const { text } = require('stream/consumers');
 
 const httpServer = createServer(app);
 
 const io = new Server(httpServer, { /* options */ });
+
+const chatHistory = []
 
 // there are two types of event in socketio....builtin and custom....there are only two builtin event
 
@@ -26,8 +29,20 @@ io.on("connection", (socket) => {    // first builtin event
 
    socket.on("ai-message",async (data)=>{
     console.log(data.prompt)
-    const response = await generateResponse(data.prompt)
+
+    chatHistory.push({
+        role:"user",
+        parts: [{text:data.prompt}]
+    })
+
+    const response = await generateResponse(chatHistory)
     console.log("ai response : ", response);
+
+    chatHistory.push({
+        role:"model",
+        parts: [{text:response}]
+    })
+
     socket.emit("ai-message-response",{response})
    })
 });
