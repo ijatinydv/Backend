@@ -1,0 +1,3 @@
+[submodule "Chatgpt"]
+	path = Chatgpt
+	url = https://github.com/ijatinydv/MyChatgpt
